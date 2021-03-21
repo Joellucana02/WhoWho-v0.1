@@ -33,11 +33,15 @@ body{
 }
 /* ================================================ */
 main {
-    width: 100%;
+    width: 21rem;
     height: 100%;
+    margin: auto;
+    /* resize: both; */
+  overflow: auto;
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: repeat(12, 1fr);
+    grid-template-columns: repeat(6, 3.5rem);
+    grid-template-rows: repeat(12, 4.25rem);
+    /* position: absolute; */
 }
 /* ================================================ */
 .top__container{
