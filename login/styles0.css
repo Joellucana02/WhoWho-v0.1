@@ -11,12 +11,20 @@
 *:focus {
   outline: none;
 }
-/* ================================================ */
-main{
-    background: rgb(65,59,73);
-    background: linear-gradient(0deg, rgba(65,59,73,1) 0%, rgba(0,0,0,1) 100%);
+body{
     width: 100vw;
     height: 100vh;
+    background: rgb(65,59,73);
+    background: linear-gradient(0deg, rgba(65,59,73,1) 0%, rgba(0,0,0,1) 100%);
+
+    /* object-position: cover; */
+}
+/* ================================================ */
+main{
+    width: 100%;
+    height: 100%;
+/*     background: rgb(65,59,73);
+    background: linear-gradient(0deg, rgba(65,59,73,1) 0%, rgba(0,0,0,1) 100%); */
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(12, 1fr);
@@ -119,7 +127,7 @@ main{
      justify-self: center;
      align-items: center;
      
-    margin-top: 2rem;
+    margin-top: .6rem;
  }
 .form__box form input {
   background: #171717;
@@ -133,7 +141,7 @@ main{
   width: 90%;
   cursor: pointer;
   color: #fff;
-  margin-bottom: 1rem;
+  margin-bottom: .8rem;
   margin-top: .2rem;
 }
 .form__box form input[type="submit"]{
