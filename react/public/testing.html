@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table> 
+        <thead>
+            <tr>
+                <th>name</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+        <template class="template-ejemplo">
+            <tr>
+                <td class="testeo">examle</td>
+            </tr>
+        </template>
+        </table>
+        <script>
+            let $template1 = document.querySelector('.template-ejemplo');
+            console.log($template1);
+            console.log($template1.querySelector('.testeo'))
+            fetch("https://anapithatmakessomething.herokuapp.com/users")
+            .then (resp => resp.json())
+            .then(data => {
+                console.log(data)
+            })
+        </script>
+</html>

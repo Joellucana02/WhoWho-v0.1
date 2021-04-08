@@ -9,8 +9,6 @@ ReactDOM.render(
 	document.getElementById('root')
 );
 
-React.createElement(
-	
-)
+React.createElement()
 
 reportWebVitals();
