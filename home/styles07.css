@@ -65,7 +65,7 @@ main{
 
 }
 .content__container{
-    width: 100%;
+    width: 100vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -79,6 +79,7 @@ main{
     align-items: center;
     justify-content: space-between;
     width: 100%;
+    position: relative;
 }
 .content__container .content__top-left{
     display: flex;
@@ -98,9 +99,6 @@ main{
     color: #5da5e0;
     font-weight: 600;
 }
-.content__container .content__top a{
-    /* color: rgb(30, 32, 172); */
-}
 .content__container .content__top div{
 
     /* align-self: flex-end; */
@@ -109,9 +107,16 @@ main{
 }
 .content__block{
     margin: 1.5rem 0;
+    
 }
-.content__block p{
-    margin: 0 .5rem ;
+/* .content__block-text{
+    margin: 0 .5rem;
+    
+} */
+.content__block .content__block-text{
+    /* margin: 0 .5rem; */
+    width: 95vw;
+    overflow-wrap: break-word;
 }
 .content__bottom{
     width: 100%;
@@ -180,4 +185,87 @@ main .btn-2{
 }
 main .btn-2 i{
      border-radius: 50%;
+}
+/* ---------------------------------------------------- */
+.form-post{
+    background: #202020;
+    position: absolute;
+    /* top: 100px; */
+    /* padding: 2rem 90%; */
+    display: flex;
+    flex-direction: column;
+    justify-content:space-evenly;
+    align-items: center;
+    width: 100%;
+    padding: 5rem;
+    top: 10rem;
+    z-index: 100;
+    border-radius: .5rem;
+    visibility: hidden;
+}
+.form-post--active{
+    visibility: visible;
+}
+.form-post input:nth-child(1) {
+    padding: 1rem 4rem 6rem;
+    /* align-self: flex-start; */
+    background: #171717;
+    /* padding: 1.2rem 0; */
+    border-radius: 15px;
+    border: none;
+    font-size: 1rem;
+    border: 3px solid #252525;
+    padding-left: 20px;
+    font-weight: 300;
+    /* width: 100%; */
+    cursor: pointer;
+    color: #fff;
+    margin-bottom: .8rem;
+    margin-top: .2rem;
+    text-align: start;
+    position: relative;
+    overflow-wrap: break-word;
+}
+
+.form-post input:nth-child(2) {
+    /* padding: .5rem 2rem; */
+     padding: 1rem 2rem;
+    /* align-self: flex-start; */
+    background: #e50c6e;
+    /* padding: 1.2rem 0; */
+    border-radius: 15px;
+    border: none;
+    font-size: 1rem;
+    border: 3px solid #252525;
+    padding-left: 20px;
+    font-weight: 300;
+    /* width: 100%; */
+    cursor: pointer;
+    color: #fff;
+    margin-bottom: .8rem;
+    margin-top: .2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.form-post-close__btn{
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    font-size: 2rem;
+
+}
+.content__buttons{
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    display: flex;
+    flex-direction: column;
+    visibility: hidden;
+}
+.content__buttons button{
+    width: 6rem;
+}
+.content__buttons--active{
+    visibility: visible;
 }
