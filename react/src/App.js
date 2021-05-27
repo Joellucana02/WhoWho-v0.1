@@ -1,97 +1,132 @@
-import '%PUBLIC_URL%/css/styles07.css';
-// import './font5/all.css';
+import './css/styles07.css';
+const jsonHref = "http://localhost:5000/post";
+const maxTwitsPage = 20 // su modificación requiere cambiar el return de Twits
 
-let post0 = {
-  principal_page: "http://gogle.com/",
-  name: "Isabella Walker",
-  image: "https://randomuser.me/api/portraits/women/69.jpg",
-  pubication: "Lorem ipsum dolor sit amet consectetur, adipisicing elit.lorem Lorem ipsum dolor, sit amet consectetur adipisicing elit. Error eaque ex modi, laborum eveniet quidem quo unde quod culpa voluptatem sint, iusto magnam tenetur quia deserunt nemo cum, est vitae.",
-  views: 4631
-};
-let post1 = {
-  principal_page: "http://gogle.com/",
-  name: "Jacobo King",
-  image: "https://randomuser.me/api/portraits/men/36.jpg",
-  pubication: "Llor sit amet consectetur adipisicing elit. Voluptas possimus, aut ipsum voluptatem, non inventore officiis reprehenderit deleniti voluptate illo nobis in corrupti harum sit enim quae sapiente voluptatibus quod. quo unde quod Lorem ipsum dolor sit, amet consectetur adipisicing elit. Error, praesentium beatae harum cumque iusto consequuntur optio! Labore dolore, reprehenderit itaque nulla odit praesentium dolorum possimus iure! Rem itaque eveniet cupiditate. culpa voluptatem sint, iusto magnam tenetur quia deserunt nemo cum, est vitae.",
-  views: 2932
-};
-let post2 = {
-  principal_page: "http://gogle.com/",
-  name: "Isabella Walker",
-  image: "https://randomuser.me/api/portraits/women/32.jpg",
-  pubication: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Error, praesentium beatae harum cumque iusto consequuntur optio! Labore dolore, reprehenderit itaque nulla odit praesentium",
-  views: 123
-};
-// function post(principal_page, name, ) {
-  
-// }
-// var tomi = new post 
-// (
-//   "http://gogle.com/",
-//   "Isabella Walker",
-//   "https://randomuser.me/api/portraits/women/69.jpg",
-//   4631
-// );
-
-function Twit (f){
-  return (
-    <div className="content__container">
-      <div className="content__top">
-        <div className="content__top-left">
-          <a href={f.post.principal_page}>
-            <img src={f.post.image} alt="women"></img>
-          </a>
-          <p>{f.post.name}</p>
-          <a href={f.post.principal_page}>Follow</a>
+function Twit (el){
+    // console.log ("funcion twit (", el, ")");                                                       // test
+    return (
+        <div className="content__container">
+            <div className="content__top">
+              <div className="content__top-left">
+                  <a href={el.post.principal_page}>
+                      <img src={el.post.image} alt={el.post.genero}></img>
+                  </a>
+                  <p>{el.post.name}</p>
+                  <a href={el.post.principal_page}>Follow</a>
+              </div>
+              <div><i className="fas fa-ellipsis-h"></i></div>
+              <div className="content__buttons">
+                  <button className="edit creador-post">Edit</button>
+                  <button className="delete">Delete</button>
+              </div>
+            </div>
+            <div className="content__block">
+               <p>{el.post.pubication}</p>
+            </div>
+            <div className="content__bottom">
+                <p>{el.post.views} views</p>
+                <div className="content__bottom-icon"> 
+                    <div><i className="far fa-paper-plane"></i></div>
+                    <div><i className="far fa-retweet"></i></div>
+                    <div><i className="far fa-heart"></i></div>
+                </div>
+            </div>
         </div>
-        <div><i className="fas fa-ellipsis-h"></i></div>
-      </div>
-      <div className="content__block">
-        <p>{f.post.pubication}</p>
-      </div>
-      <div className="content__bottom">
-        <p>{f.post.views} views</p>
-        <div className="content__bottom-icon"> 
-          <div><i className="far fa-paper-plane"></i></div>
-          <div><i className="far fa-retweet"></i></div>
-          <div><i className="far fa-heart"></i></div>
-        </div>
-      </div>
-    </div>
-  );
+    );
 }
-var fs = require('fs');
 
 
+function antiDesbordes(maxTwits, resto) {
+    // console.log("funcion antiDesvordes = ");                                                       // test
+    // if (resto < 0) {                                                                               // test
+    //     console.error("resto no puede ser negativo");                                              // test
+    // }                                                                                              // test
+    if (maxTwits - resto < 0) {
+        // console.log(Math.trunc(Math.random () * maxTwits), "true");                                // test
+        return Math.trunc(Math.random () * maxTwits);
+    }else {
+        // console.log(maxTwits - resto ," false");                                                   // test
+        return maxTwits - resto;
+    }
+}
 
 
+function Twits (){
+    let page = 0;
+    let i = 0;
+    let maxTwits = maxTwitsPage;
+    try 
+    {
+        let jonPost = new XMLHttpRequest ();
+        jonPost.open("GET", jsonHref, false);
+        jonPost.send ();
+        let post = JSON.parse (jonPost.response);
+        // if (maxTwitsPage <= 0){                                                                    // test
+        //     console.error("error MaxTwitsPage no puede ser 0 o negativo");                         // test
+        //     RangeError ("MaxTwitsPage no puede ser 0 o negativo");
+        // }                                                                                          // test
+        while (i < maxTwitsPage) {
+            // console.log("i = ",i);
+            if (post[page * 10 + i] === undefined) {
+                // console.log("true");                                                               // test
+                maxTwits = page * 10 + i;
+                i = maxTwitsPage;
+            }else{
+                // console.log("else");                                                               // test
+                i++;
+            }
+        }
+        // console.log("maxTwits = ", maxTwits);                                                      // test
+        // lamento la cantidad de "post" que hay pero no encontre otra manera
+        return (
+                <div>
+                    <Twit post = {post[antiDesbordes(maxTwits, 1)]}/>
+                    <Twit post = {post[antiDesbordes(maxTwits, 2)]}/>
+                    <Twit post = {post[antiDesbordes(maxTwits, 4)]}/>
+                    <Twit post = {post[antiDesbordes(maxTwits, 5)]}/>
+                    <Twit post = {post[antiDesbordes(maxTwits, 3)]}/>
+                    <Twit post = {post[antiDesbordes(maxTwits, 6)]}/>
+                    <Twit post = {post[antiDesbordes(maxTwits, 7)]}/>
+                    <Twit post = {post[antiDesbordes(maxTwits, 8)]}/>
+                    <Twit post = {post[antiDesbordes(maxTwits, 9)]}/>
+                    <Twit post = {post[antiDesbordes(maxTwits, 10)]}/>
+                    <Twit post = {post[antiDesbordes(maxTwits, 11)]}/>
+                    <Twit post = {post[antiDesbordes(maxTwits, 12)]}/>
+                    <Twit post = {post[antiDesbordes(maxTwits, 13)]}/>
+                    <Twit post = {post[antiDesbordes(maxTwits, 14)]}/>
+                    <Twit post = {post[antiDesbordes(maxTwits, 15)]}/>
+                    <Twit post = {post[antiDesbordes(maxTwits, 16)]}/>
+                    <Twit post = {post[antiDesbordes(maxTwits, 17)]}/>
+                    <Twit post = {post[antiDesbordes(maxTwits, 18)]}/>
+                    <Twit post = {post[antiDesbordes(maxTwits, 19)]}/>
+                </div>
+        );
+    }catch (error)
+    {
+        console.log (`Error ${error.status}: ${error.statusText}`);
+        return(
+            <div>
+                <p color = "FFFFFF">error {error.status}: {error.statusText}</p>
+            </div>
+        )
+    }
+    
+}
 
 
 function App() {
-  console.log (JSON.stringify(post0));
-  var hla = JSON.stringify(post0);
-  // fs.writeFile("./db1.json", hla, "utf-8");
-  // console.log (JSON.parse(post0))
-  return (
-    <div className="main">
-      <div className="header">
-        <a href="index.html">WW</a>
-        <a href="index.html">cerrar cuenta</a>
-        <div>
-          <input type="search" id="gsearch" name="gsearch" placeholder="Explore"/>
-          <i className="fas fa-search"></i>
+    return (
+        <div className="main">
+            <div className="header">
+                <a href="index.html">WW</a>
+                <div>
+                    <input type="search" id="gsearch" name="gsearch" placeholder="Explore" onn/>
+                    <i className="fas fa-search"></i>
+                </div>
+            </div>
+            <Twits/>
+
         </div>
-      </div>
-      <Twit post = {post0}/>
-      <Twit post = {post1}/>
-      <Twit post = {post2}/>
-      <div class="btn">
-        <a href="#"><i class="fas fa-plus"></i></a>
-      </div>
-      <div class="btn btn-2">
-        <a href="../dashboard/user.html"><i class="fas fa-user"></i></a>
-      </div>
-    </div>
-  )
+    )
 }
 export default App;
